@@ -1,0 +1,5 @@
+SELECT SC.CategoryName, SO.ServiceDetails, SO.EligibilityCriteria, SO.IsFree
+FROM ServiceOffering SO
+JOIN Organization O ON SO.OrgID = O.OrgID
+JOIN ServiceCategory SC ON SO.CategoryID = SC.CategoryID
+WHERE O.OrgName = 'The TEARS Foundation';
