@@ -1,0 +1,9 @@
+SELECT DISTINCT O.OrgName, O.Website, L.Country, L.StateProvince
+FROM Organization O
+JOIN ServiceOffering SO ON O.OrgID = SO.OrgID
+JOIN ServiceCategory SC ON SO.CategoryID = SC.CategoryID
+JOIN ServiceTarget ST ON SO.ServiceOfferingID = ST.ServiceOfferingID
+JOIN TargetGroup TG ON ST.TargetGroupID = TG.TargetGroupID
+LEFT JOIN Location L ON O.OrgID = L.OrgID AND L.IsServiceArea = TRUE
+WHERE SC.CategoryName = 'Financial Assistance'
+AND TG.GroupName = 'Infants (0-1yr)';
