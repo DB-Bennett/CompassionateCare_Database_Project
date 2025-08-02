@@ -1,0 +1,17 @@
+CompassionateCare_Database_Project/
+├── README.md                      # Project overview, setup instructions, key findings
+├── sql/
+│   ├── schema.sql                 # SQL script for table creation
+│   ├── data_population.sql        # SQL script for inserting sample data
+│   ├── queries.sql                # SQL scripts for various practice queries
+│   └── DDL_DML_Notes.md           # Notes on Data Definition Language (DDL) and Data Manipulation Language (DML)
+├── excel/
+│   └── CompassionateCare_Services.xlsx # Excel list of organizations and services
+├── presentation/
+│   ├── project_showcase.pptx      # PowerPoint presentation
+│   └── interview_breakdown.md     # Short text for interview
+├── documentation/
+│   ├── ERD.png                    # Entity-Relationship Diagram of the database schema
+│   ├── data_sources.md            # Notes on data collection strategy and sources
+│   └── project_goals.md           # Detailed project goals and impact
+└── .gitignore                     # Files to ignore (e.g., .DS_Store, personal notes)
