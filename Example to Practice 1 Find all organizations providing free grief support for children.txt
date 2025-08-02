@@ -1,0 +1,11 @@
+SELECT O.OrgName, L.City, L.StateProvince, L.Country, SO.ServiceDetails
+FROM Organization O
+JOIN OrganizationType OT ON O.TypeID = OT.TypeID
+JOIN ServiceOffering SO ON O.OrgID = SO.OrgID
+JOIN ServiceCategory SC ON SO.CategoryID = SC.CategoryID
+JOIN ServiceTarget ST ON SO.ServiceOfferingID = ST.ServiceOfferingID
+JOIN TargetGroup TG ON ST.TargetGroupID = TG.TargetGroupID
+LEFT JOIN Location L ON O.OrgID = L.OrgID AND L.IsServiceArea = TRUE
+WHERE SC.CategoryName = 'Grief Support'
+AND SO.IsFree = TRUE
+AND (TG.GroupName LIKE 'Children%' OR TG.GroupName = 'Infants (0-1yr)' OR TG.GroupName = 'Teenagers (13-22yr)');
