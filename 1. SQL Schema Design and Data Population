@@ -1,0 +1,78 @@
+1. SQL Schema Design and Data Population
+Database Name: CompassionateCareDB
+
+Tables:
+
+OrganizationType: Categorizes the type of entity.
+
+TypeID (PK, INT)
+
+TypeName (VARCHAR(50)) - e.g., 'Charity', 'Church', 'Government Program', 'Funeral Home Partner'
+
+ServiceCategory: Defines broad categories of services offered.
+
+CategoryID (PK, INT)
+
+CategoryName (VARCHAR(100)) - e.g., 'Financial Assistance', 'Grief Support', 'Burial/Cremation', 'Memorial Services', 'Legal Aid'
+
+Organization: Main table for each organization.
+
+OrgID (PK, INT)
+
+OrgName (VARCHAR(255) NOT NULL)
+
+Description (TEXT)
+
+Website (VARCHAR(255))
+
+ContactPhone (VARCHAR(50))
+
+ContactEmail (VARCHAR(255))
+
+TypeID (FK, INT) - Links to OrganizationType
+
+Location: Geographic information for organizations or service areas.
+
+LocationID (PK, INT)
+
+OrgID (FK, INT) - Links to Organization (if the location is specific to the organization's office/main service point)
+
+Country (VARCHAR(100) NOT NULL)
+
+StateProvince (VARCHAR(100))
+
+City (VARCHAR(100))
+
+ZipCode (VARCHAR(20))
+
+IsServiceArea (BOOLEAN) - True if this location record defines a service area, false if it's an office address.
+
+ServiceOffering: Details specific services offered by an organization.
+
+ServiceOfferingID (PK, INT)
+
+OrgID (FK, INT) - Links to Organization
+
+CategoryID (FK, INT) - Links to ServiceCategory
+
+ServiceDetails (TEXT) - Specifics of the service (e.g., "up to $500 for cremation," "free peer support groups")
+
+EligibilityCriteria (TEXT) - e.g., "low-income families," "child 0-18 years," "stillbirth"
+
+IsFree (BOOLEAN) - True if free, false if low-cost/subsidized
+
+Notes (TEXT)
+
+TargetGroup: Defines who the service is for (e.g., children, parents, specific age ranges).
+
+TargetGroupID (PK, INT)
+
+GroupName (VARCHAR(100)) - e.g., 'Infants (0-1yr)', 'Children (1-12yr)', 'Teenagers (13-18yr)', 'Bereaved Parents'
+
+ServiceTarget: Junction table for ServiceOffering and TargetGroup.
+
+ServiceOfferingID (FK, INT)
+
+
+*Note* See the following file for next steps "SQL Schema (PostgreSQL syntax for example):" 
+TargetGroupID (FK, INT)
