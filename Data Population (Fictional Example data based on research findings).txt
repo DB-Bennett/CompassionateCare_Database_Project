@@ -1,0 +1,63 @@
+-- Populate OrganizationType
+INSERT INTO OrganizationType (TypeName) VALUES
+('Charity/Non-Profit'), ('Church'), ('Government Program'), ('Funeral Home Partner'), ('Support Group');
+
+-- Populate ServiceCategory
+INSERT INTO ServiceCategory (CategoryName) VALUES
+('Financial Assistance'), ('Grief Support'), ('Burial/Cremation Services'), ('Memorial Services'), ('Grave Markers/Plots'), ('Counseling');
+
+-- Populate TargetGroup
+INSERT INTO TargetGroup (GroupName) VALUES
+('Infants (0-1yr)'), ('Children (1-12yr)'), ('Teenagers (13-22yr)'), ('Parents/Guardians'), ('Siblings'), ('Families');
+
+-- Populate Organization
+INSERT INTO Organization (OrgName, Description, Website, ContactPhone, ContactEmail, TypeID) VALUES
+('The TEARS Foundation', 'Provides financial and emotional support to families who have lost a baby or child.', 'https://thetearsfoundation.org', '253-200-0944', 'office@thetearsfoundation.org', 1),
+('Childrens Burial Assistance', 'Helps families honor their deceased children with a decent and proper burial.', 'https://www.childrensburial.org', NULL, NULL, 1),
+('Final Farewell', 'Helps families provide an affordable funeral for a loved child, primarily PA.', 'https://finalfarewell.org', NULL, NULL, 1),
+('Ingram, Smith & Turner Mortuary (Sleeping Angels Ministry)', 'Partners with Sleeping Angels Foundation for cremation or burial assistance for children.', 'https://www.ingramsmithturner.com', '405-488-3848', NULL, 4),
+('Catholic Charities USA', 'Offers various social services, sometimes including funeral assistance.', 'https://www.catholiccharitiesusa.org', NULL, NULL, 1),
+('The Compassionate Friends', 'Provides highly personal comfort, hope, and support to every family experiencing the death of a child or sibling.', 'https://www.compassionatefriends.org', NULL, NULL, 5),
+('Dougy Center', 'Provides support in a safe place where children, teens, young adults, and their families grieving a death can share their experiences.', 'https://www.dougy.org', NULL, NULL, 5);
+
+-- Populate Location (Service Areas and specific offices where known)
+INSERT INTO Location (OrgID, Country, StateProvince, City, IsServiceArea) VALUES
+(1, 'USA', 'WA', 'Federal Way', FALSE), -- TEARS main office
+(1, 'USA', 'AL', NULL, TRUE), -- TEARS service area
+(1, 'USA', 'AZ', NULL, TRUE), -- TEARS service area
+(1, 'USA', 'MA', NULL, TRUE), -- TEARS service area
+(2, 'USA', 'PA', NULL, TRUE), -- CBA focus
+(3, 'USA', 'PA', 'Philadelphia', TRUE), -- Final Farewell focus
+(4, 'USA', 'OK', 'Yukon', FALSE), -- Ingram, Smith & Turner
+(5, 'USA', NULL, NULL, TRUE), -- Catholic Charities (national reach, local chapters)
+(6, 'USA', NULL, NULL, TRUE), -- Compassionate Friends (chapters nationwide/worldwide)
+(7, 'USA', 'OR', 'Portland', FALSE), -- Dougy Center main office
+(7, 'Global', NULL, NULL, TRUE); -- Dougy Center also provides international training
+
+-- Populate ServiceOffering
+INSERT INTO ServiceOffering (OrgID, CategoryID, ServiceDetails, EligibilityCriteria, IsFree, Notes) VALUES
+(1, 1, 'Financial aid for funeral/cremation up to $500 for babies 20 weeks gestation to 1 year old.', 'Families residing in specific states (AL, AZ, MA, etc.), child 20 weeks gestation to 1 year.', FALSE, 'Amount varies by program, direct payment to funeral homes.'),
+(1, 1, 'Financial aid for children aged 1-12 years (external causes of death).', 'Child 1-12 years, death from external causes (suicide, accident, SUDC), residing in specific states (AK, AZ, MA, etc.).', FALSE, 'Program: Charlie and Braden Project. Direct payment to funeral homes.'),
+(1, 1, 'Grave marker assistance for babies 20 weeks gestation to 1 year.', 'Baby 20 weeks gestation to 1 year, 6+ months since passing, residing in specific states (AK, AZ, MA, etc.).', FALSE, 'Program: Jesse''s Grant. Flat, granite grave marker.'),
+(1, 2, 'Free support groups for bereaved families.', 'Families who have experienced the death of their baby.', TRUE, 'Available in various locations.'),
+(1, 6, 'Grief counseling support.', 'Child 13-22 years, death due to drug-related causes or suicide.', TRUE, 'Program: Cali''s Gift.'),
+(2, 3, 'Assistance with burial expenses, including plots and open/close fees.', 'Families with a deceased child.', FALSE, 'Accepts donations of burial plots.'),
+(3, 3, 'Full funeral services, including burial, at no cost in neediest cases.', 'Families struggling financially with child funeral/burial costs, primarily PA.', TRUE, 'Volunteer-run, negotiates at-cost/donated services.'),
+(4, 3, 'Cremation or burial assistance for stillbirths and children up to 18 years.', 'Stillbirths and infant loss through children 18 years of age.', TRUE, 'Partners with Sleeping Angels Foundation.'),
+(5, 1, 'Financial assistance for indigent burials.', 'Low-income families, eligibility varies by local diocese.', FALSE, 'Contact local Catholic Charities office.'),
+(6, 2, 'Peer-to-peer emotional support.', 'Families experiencing the death of a son, daughter, brother, sister, or grandchild.', TRUE, 'Local chapters provide support meetings.'),
+(7, 2, 'Grief support groups and programs for children, teens, and families.', 'Children, teens, young adults, and their families grieving a death.', TRUE, 'Offers support in a safe place. Training for professionals available globally.');
+
+-- Populate ServiceTarget (example connections)
+INSERT INTO ServiceTarget (ServiceOfferingID, TargetGroupID) VALUES
+(1, 1), (1, 4), -- TEARS financial for infants
+(2, 2), (2, 4), -- TEARS financial for children
+(3, 1), (3, 4), -- TEARS grave marker for infants
+(4, 1), (4, 2), (4, 3), (4, 4), (4, 5), (4, 6), -- TEARS support groups for all affected
+(5, 3), (5, 4), -- TEARS counseling for teens/parents
+(6, 2), (6, 4), (6, 6), -- CBA burial for children/families
+(7, 2), (7, 4), (7, 6), -- Final Farewell for children/families
+(8, 1), (8, 2), (8, 3), (8, 4), (8, 6), -- Sleeping Angels for various child ages
+(9, 4), (9, 6), -- Catholic Charities for families
+(10, 1), (10, 2), (10, 3), (10, 4), (10, 5), (10, 6), -- Compassionate Friends for all grieving family members
+(11, 1), (11, 2), (11, 3), (11, 4), (11, 5), (11, 6); -- Dougy Center for all grieving family members
