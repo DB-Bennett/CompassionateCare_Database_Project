@@ -1,0 +1,5 @@
+SELECT OT.TypeName, COUNT(O.OrgID) AS NumberOfOrganizations
+FROM Organization O
+JOIN OrganizationType OT ON O.TypeID = OT.TypeID
+GROUP BY OT.TypeName
+ORDER BY NumberOfOrganizations DESC;
